@@ -14,12 +14,25 @@ on:
 
 jobs:
   release:
-    name: Publish Job
+    name: Publish Package to Github
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com/
+          scope: "@smerth"
+
+      - name: Edit .npmrc
+        run: |
+          echo "registry=https://registry.npmjs.org" > .npmrc
+          echo "@smerth=https://npm.pkg.github.com/smerth" >> .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.INSTALL_PUBLISH_PRIVATE_GITHUB_PACKAGES }}" >> .npmrc
+          
       - name: Install Dependancies
         run: npm ci
 
@@ -32,4 +45,4 @@ jobs:
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.INSTALL_PUBLISH_PRIVATE_GITHUB_PACKAGES }}
