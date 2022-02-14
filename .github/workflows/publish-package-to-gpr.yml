@@ -1,0 +1,35 @@
+name: Publish Package to Github Package Registry
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+      - next
+      - next-major
+      - alpha
+      - beta
+
+jobs:
+  release:
+    name: Publish Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependancies
+        run: npm ci
+
+      - name: Build Package
+        run: npm run build
+
+      - name: Release & Publish
+        uses: cycjimmy/semantic-release-action@v2
+        id: semantic
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GH_TOKEN }}

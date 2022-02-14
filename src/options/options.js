@@ -1,0 +1,15 @@
+module.exports = {
+  numberOfAuthors: 10,
+  minArticlesPerAuthor: 1,
+  maxArticlesPerAuthor: 3,
+  basePath: "content/news-of-the-world",
+  authorImageName: "headshot",
+  authorImageExtention: "png",
+  authorMarkdownFilename: "bio",
+  startDate: new Date(1997, 0, 1),
+  endDate: new Date(),
+  dateFormat: "yyyy-MM-dd",
+  postImageName: "post-image",
+  postImageExtention: "png",
+  // noImages: true,
+};
