@@ -1,7 +1,7 @@
-import { createContent } from "./functions/createContent.js";
-// import { deleteContent } from "./functions/deleteContent.js";
+import { createContent } from "./functions/create-content.js";
+import { deleteContent } from "./functions/delete-content.js";
 
 module.exports = {
   createContent,
-  // deleteContent
+  deleteContent,
 };
