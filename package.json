@@ -35,7 +35,7 @@
     "validate": "npm run cover && npm run check-coverage",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "setup": "npm install && npm run validate",
-    "push": "git push origin -u master",
+    "push": "git push origin -u main",
     "generate": "npm run build && node dist/functions/generate.js",
     "delete": "npm run build && node dist/functions/delete.js"
   },
