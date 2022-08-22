@@ -24,22 +24,24 @@
     "README.md"
   ],
   "scripts": {
-    "commit": "git add . && git-cz",
+    "build": "babel src --ignore *.test.js --out-dir dist",
     "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "commit": "git add . && git-cz",
+    "cover": "nyc npm t",
+    "delete": "npm run build && node dist/functions/delete.js",
+    "demo": "npm run demo/generate.js",
+    "generate": "npm run build && node dist/functions/generate.js",
+    "prebuild": "rm -rf dist && mkdir dist",
+    "push": "git push origin -u main",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "setup": "npm install && npm run validate",
     "start": "npm run test:watch",
     "test:watch": "npm t -- --watch",
     "test": "mocha src/functions/*.test.js --require @babel/register",
-    "cover": "nyc npm t",
-    "prebuild": "rm -rf dist && mkdir dist",
-    "build": "babel src --ignore *.test.js --out-dir dist",
-    "validate": "npm run cover && npm run check-coverage",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "setup": "npm install && npm run validate",
-    "push": "git push origin -u main",
-    "generate": "npm run build && node dist/functions/generate.js",
-    "delete": "npm run build && node dist/functions/delete.js"
+    "validate": "npm run cover && npm run check-coverage"
   },
   "dependencies": {
+    "canvas": "^2.9.0",
     "date-format": "^4.0.3",
     "fs-extra": "^10.0.0",
     "json2md": "^1.12.0",
@@ -48,8 +50,7 @@
     "request": "^2.88.2",
     "shelljs": "^0.8.5",
     "uuid": "^8.3.2",
-    "yaml": "^1.10.2",
-    "canvas": "^2.9.0"
+    "yaml": "^1.10.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",

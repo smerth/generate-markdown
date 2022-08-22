@@ -1,72 +1,98 @@
-# Welcome to @smerth/npm-module-template 👋
+# @smerth/generate-markdown 
 
-> A starting point for developing javascript modules
+> This package exports `createContent` and `deleteContent` functions which take an options object and generate/delete Author and Post markdown files based on those options.
+> This may be usefull when you are developing a markdown based application.
 
-### 🏠 [Homepage](https://github.com/smerth/npm-module-template#readme)
 
-## Setup
 
-- [ ] Click on template to generate a new repository from this template repository.
 
-- [ ] Clone the new repo
+## Use in an application
 
+### 1. Install the package
+
+Install from the command line:
 ```bash
-git clone new-repo
+$ npm install @smerth/generate-markdown@1.1.1
+```
+Install via package.json:
+```json
+"@smerth/generate-markdown": "1.1.1" 
 ```
 
-- [ ] Add a token to enable publishing a package to Github. The token must be named `GH_TOKEN` and grant permission to read and write packages
+### 2. Create a file to execute the `generate` function
 
-- [ ] Run setup to install dependancies and run the validate script
+@ utilities/generate.js
+
+require the functions
+
+```javascript
+const { createContent, deleteContent } = require("@smerth/generate-markdown");
+
+const options = {
+  numberOfAuthors: 4,
+  minArticlesPerAuthor: 3,
+  maxArticlesPerAuthor: 6,
+  basePath: "content/news-of-the-world",
+  authorImageName: "headshot",
+  authorImageExtention: "png",
+  authorMarkdownFilename: "bio",
+  startDate: new Date(2020, 0, 1),
+  endDate: new Date(),
+  dateFormat: "yyyy-MM-dd",
+  postImageName: "post-image",
+  postImageExtention: "png",
+  // noImages: true,
+};
+
+deleteContent(options.basePath);
+createContent(options);
+```
+### 3. Run the generate function
+Add a script to your application's package.json file
+
+```json
+"demo": "npm run utilities/generate.js"
+```
+
+
+
+
+
+
+## Develop this package
+
+### 1. Setup
+
+- clone the repo
+- install dependancies and run validate
 
 ```bash
 npm run setup
 ```
 
-- [ ] Edit description and tags on the github repository page. This data is used to gernerate the README.md file
+### 2. Generate some dummy markdown files
 
-- [ ] Edit package json file. This data is used to gernerate the README.md file and of course to publish the package.
+`@ options/options.js` contains the settings for generating some dummy markdown files these options can be adjusted according to your needs.
 
-  - make sure to set the version back to `v1.0.0` or whatever is appropriate as a starting point
+- `npm run generate` - to generate files
+- `npm run delete` - to delete the content folder
 
-- [ ] Delete the contents of the changelog.  This will be auto appended by the Github workflow.
+### 3. Develop
 
-- [ ] Edit `.npmrc` to use your own github user name
+To develop you can run `npm run start` or `npm run test:watch` to run tests as you develop.  You can define a test, which will fail until you write the code to pass the test.
 
-- [ ] Generate a readme file to replace the existing one
+### 4. Commit and push code
 
-```bash
-readme
-```
+To commit your code run `npm run commit`.  When you commit with Commitizen, you'll be prompted to fill out any required commit fields at commit time.
 
-- [ ] Commit your changes
+### 5. Publish Package
 
-```bash
-npm run commit
-```
+This repo is set up with a GitHub action to publish packages.  
 
-- [ ] Push to github. This triggers the workflow to tag a release and publish the first package.
-
-```bash
-npm run push
-```
+- When a PULL_REQUEST is merged with the `main` branch a `@latest` version of the package is built and published.
+- When a PULL_REQUEST is merged with the `next` branch a `@next` version of the package is built and published.
 
 
-> Don't forget to pull after publishing as the workflow updates the `changelog.md` and `package.json` files
-
-
-Now your ready to look into src and replace the functions and tests with your own.
-
-## Develop
-
-```sh
-npm run start
-```
-
-## Run tests
-
-```sh
-npm run test
-```
 
 ## Author
 
