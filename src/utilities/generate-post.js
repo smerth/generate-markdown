@@ -64,6 +64,7 @@ export function generatePost(
     image_alt: "Alt text.",
     image_credit_text: "Image Creator's Name",
     image_credit_link: "Link to Image Creator",
+    image_description: "Image Description Text",
   };
 
   const postYaml = jsonToYaml(postJSON);
