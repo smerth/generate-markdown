@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "registry=https://registry.npmjs.org" > .npmrc
           echo "@smerth=https://npm.pkg.github.com/smerth" >> .npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.INSTALL_PUBLISH_PRIVATE_GITHUB_PACKAGES }}" >> .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
 
       - name: Install Dependancies
         run: npm ci
@@ -43,4 +43,4 @@ jobs:
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.INSTALL_PUBLISH_PRIVATE_GITHUB_PACKAGES }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
